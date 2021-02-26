@@ -4,7 +4,10 @@ all: main.pdf
 # The -g flag is used to *always* process the document, even if no changes have been made to it.
 
 main.pdf: main.tex references.bib results_def.tex
-	latexmk -pdf -g $<
+    pdflatex $<
+    bibtex $(basename $<)
+    pdflatex $<
+    pdflatex $<
 
 # This rule executes the code script, and collects all the latex variables that are printed out
 # to the terminal in a file called "results_def.tex". The manuscript will use this file as input.
